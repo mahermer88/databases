@@ -3,17 +3,12 @@ import {
   checkError,
   useDatabase,
   insertTableContent,
+  jsonReader,
 } from "./initialization.js";
-import { authors, research_Papers, matching_projects } from "./data.js";
 
-//chosen columns of table authors to insert content init:
-const authorsColumns = `author_name, university, date_of_birth, h_index, gender, mentor`;
-
-//chosen columns of table research_Papers to insert content init:
-const researchPapersColumns = `paper_title, conference, publish_date`;
-
-//chosen columns of table matching_projects to insert content init:
-const matchingColumns = `project_author, project_paper`;
+const authors = jsonReader("./data_authors.json");
+const research_Papers = jsonReader("./data_research_Papers.json");
+const matching_projects = jsonReader("./data_matching_projects.json");
 
 //connection
 connection.connect((err) => {
@@ -22,9 +17,9 @@ connection.connect((err) => {
 });
 
 useDatabase(`week2_homework`);
-insertTableContent(`authors`, authorsColumns, authors);
-insertTableContent(`research_Papers`, researchPapersColumns, research_Papers);
-insertTableContent(`matching_projects`, matchingColumns, matching_projects);
+insertTableContent(`authors`, authors);
+insertTableContent(`research_Papers`, research_Papers);
+insertTableContent(`matching_projects`, matching_projects);
 
 connection.end((err) => {
   checkError(err);

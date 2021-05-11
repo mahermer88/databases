@@ -1,4 +1,5 @@
 import { createConnection } from "mysql";
+import { readFileSync } from "fs";
 
 //create connection
 export const connection = createConnection({
@@ -50,10 +51,10 @@ export const alterTable = (tableName, alterTableFields) => {
 };
 
 //function to insert content rows depending on table name and chosen columns:
-export const insertTableContent = (tableName, tableColumns, rowsContent) => {
-  rowsContent.forEach((row) => {
-    const sql = `INSERT INTO ${tableName} (${tableColumns}) VALUES ${row}`;
-    connection.query(sql, (err, results) => {
+export const insertTableContent = (tableName, content) => {
+  content.forEach((row) => {
+    const sql = `INSERT INTO ${tableName} SET ?`;
+    connection.query(sql, row, (err, results) => {
       checkError(err);
       console.log(`Content is inserted in ${tableName}`);
     });
@@ -68,4 +69,11 @@ export const executeQueries = (queries) => {
       console.log(results);
     });
   });
+};
+
+//function to read json file:
+export const jsonReader = (filePath) => {
+  const file = readFileSync(filePath, `utf-8`);
+  const array = JSON.parse(file);
+  return array;
 };
