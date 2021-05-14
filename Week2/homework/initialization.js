@@ -5,7 +5,7 @@ import { readFileSync } from "fs";
 export const connection = createConnection({
   host: "localhost",
   user: "hyfuser",
-  password: "123456",
+  password: "hyfpassword",
 });
 
 //handle error
