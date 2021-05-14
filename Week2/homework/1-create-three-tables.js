@@ -14,11 +14,11 @@ const authorsTableFields = `
       university VARCHAR(50),
       date_of_birth DATETIME,
       h_index INT,
-      gender ENUM('Male', 'female', 'X'),
+      gender ENUM('Male', 'Female', 'X'),
       PRIMARY KEY(author_no)`;
 
 //alter table author to add a column called mentor, with foreign key
-const alterTableFields = `ADD COLUMN mentor INT,
+const alterTableAuthors = `ADD COLUMN mentor INT,
 ADD CONSTRAINT FK_author FOREIGN KEY (mentor) REFERENCES authors(author_no)`;
 //create table called research_Papers with fields:
 const researchPapersTableFields = `
@@ -46,8 +46,8 @@ connection.connect((err) => {
 createDatabase(`week2_homework`);
 useDatabase(`week2_homework`);
 createTable(`authors`, authorsTableFields);
-alterTable(`authors`, alterTableFields);
-createTable(`research_Papers`, researchPapersTableFields);
+alterTable(`authors`, alterTableAuthors);
+createTable(`research_papers`, researchPapersTableFields);
 createTable(`matching_projects`, matchingProjectsTableFields);
 
 connection.end((err) => {

@@ -13,7 +13,7 @@ const queries = [
      JOIN matching_projects
      ON paper_id = project_paper
      GROUP BY paper_id`,
-  `SELECT
+  `SELECT DISTINCT
      COUNT(*), gender
      FROM matching_projects
      JOIN authors 
@@ -23,7 +23,7 @@ const queries = [
      university, AVG(h_index)
      FROM authors
      GROUP BY university`,
-  `SELECT 
+  `SELECT DISTINCT
      university, COUNT(project_paper) 
      FROM authors
      JOIN matching_projects
