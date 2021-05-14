@@ -14,10 +14,10 @@ const queries = [
   `SELECT 
      authors.*, paper_title
      FROM authors
-     LEFT JOIN matching_projects
-     ON author_no = project_author
-     LEFT JOIN research_Papers
-     ON project_paper = paper_id`,
+     LEFT JOIN author_paper
+     ON authors.author_no = author_paper.author_no
+     LEFT JOIN research_papers
+     ON author_paper.paper_id = research_papers.paper_id`,
 ];
 
 //connection

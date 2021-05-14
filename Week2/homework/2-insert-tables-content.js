@@ -8,7 +8,7 @@ import {
 
 const authors = jsonReader("./data_authors.json");
 const research_papers = jsonReader("./data_research_papers.json");
-const matching_projects = jsonReader("./data_matching_projects.json");
+const author_paper = jsonReader("./data_author_paper.json");
 
 //connection
 connection.connect((err) => {
@@ -19,7 +19,7 @@ connection.connect((err) => {
 useDatabase(`week2_homework`);
 insertTableContent(`authors`, authors);
 insertTableContent(`research_papers`, research_papers);
-insertTableContent(`matching_projects`, matching_projects);
+insertTableContent(`author_paper`, author_paper);
 
 connection.end((err) => {
   checkError(err);

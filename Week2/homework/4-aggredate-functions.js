@@ -8,27 +8,27 @@ import {
 //
 const queries = [
   `SELECT 
-     paper_title, COUNT(project_author) AS authors
-     FROM research_Papers
-     JOIN matching_projects
-     ON paper_id = project_paper
-     GROUP BY paper_id`,
+     paper_title, COUNT(author_no) AS authors
+     FROM research_papers
+     JOIN author_paper
+     ON research_papers.paper_id = author_paper.paper_id 
+     GROUP BY author_paper.paper_id`,
   `SELECT DISTINCT
      COUNT(*), gender
-     FROM matching_projects
+     FROM author_paper
      JOIN authors 
-     ON project_author = author_no 
-     WHERE gender = 'female'`,
+     ON author_paper.author_no = authors.author_no 
+     WHERE authors.gender = 'Female'`,
   `SELECT
      university, AVG(h_index)
      FROM authors
-     GROUP BY university`,
+     GROUP BY authors.university`,
   `SELECT DISTINCT
-     university, COUNT(project_paper) 
+     university, COUNT(paper_id ) 
      FROM authors
-     JOIN matching_projects
-     ON author_no = project_author
-     GROUP BY university`,
+     JOIN author_paper
+     ON authors.author_no = author_paper.author_no
+     GROUP BY authors.university`,
   `SELECT
      university, MIN(h_index), MAX(h_index)
      FROM authors 

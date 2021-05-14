@@ -29,13 +29,12 @@ const researchPapersTableFields = `
       PRIMARY KEY(paper_id)`;
 
 //create table called matching_projects with fields, include author and papers:
-const matchingProjectsTableFields = `
-      project_id INT AUTO_INCREMENT,
-      project_author INT,
-      project_paper INT,
-      PRIMARY KEY(project_id),
-      FOREIGN KEY(project_author) REFERENCES authors(author_no),
-      FOREIGN KEY(project_paper) REFERENCES research_Papers(paper_id)`;
+const authorPaperTableFields = `
+      author_no INT,
+      paper_id INT,
+      PRIMARY KEY(author_no, paper_id),
+      FOREIGN KEY(author_no) REFERENCES authors(author_no),
+      FOREIGN KEY(paper_id) REFERENCES research_papers(paper_id)`;
 
 //connection
 connection.connect((err) => {
@@ -48,7 +47,7 @@ useDatabase(`week2_homework`);
 createTable(`authors`, authorsTableFields);
 alterTable(`authors`, alterTableAuthors);
 createTable(`research_papers`, researchPapersTableFields);
-createTable(`matching_projects`, matchingProjectsTableFields);
+createTable(`author_paper`, authorPaperTableFields);
 
 connection.end((err) => {
   checkError(err);
