@@ -9,7 +9,7 @@ const amount = 1000;
 const sending_account = 101;
 const receiving_account = 102;
 
-const queries = [
+const transactionQueries = [
   `START TRANSACTION`,
   `UPDATE account 
     SET balance = balance - ${amount}
@@ -24,6 +24,7 @@ const queries = [
     (${receiving_account}, ${amount}, 'IN')`,
   `COMMIT`,
 ];
+const rollbackQueries = [`ROLLBACK`];
 
 //connection
 connection.connect((err) => {
@@ -32,7 +33,13 @@ connection.connect((err) => {
 });
 
 useDatabase(`week3_homework`);
-executeQueries(queries);
+
+try {
+  executeQueries(transactionQueries);
+} catch (err) {
+  executeQueries(rollbackQueries);
+  checkError(err);
+}
 
 connection.end((err) => {
   checkError(err);

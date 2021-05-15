@@ -5,7 +5,7 @@ import {
   useDatabase,
   createTable,
 } from "./initialization.js";
-/*
+
 //create table called account with fields:
 const accountTableFields = `
       account_number INT PRIMARY KEY,
@@ -18,7 +18,7 @@ const accountChangesTableFields = `
       changed_date DATETIME DEFAULT CURRENT_TIMESTAMP,
       remark ENUM('IN', 'OUT'),
       FOREIGN KEY(account_number) REFERENCES account(account_number)`;
-*/
+
 //connection
 connection.connect((err) => {
   checkError(err);
@@ -27,10 +27,10 @@ connection.connect((err) => {
 
 createDatabase(`week3_homework`);
 useDatabase(`week3_homework`);
-// createTable(`account`, accountTableFields);
-// createTable(`account_changes`, accountChangesTableFields);
+createTable(`account`, accountTableFields);
+createTable(`account_changes`, accountChangesTableFields);
 
-// connection.end((err) => {
-//   checkError(err);
-//   console.log(`Mysql disconnected ..`);
-// });
+connection.end((err) => {
+  checkError(err);
+  console.log(`Mysql disconnected ..`);
+});

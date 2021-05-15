@@ -6,8 +6,10 @@ import {
   jsonReader,
 } from "./initialization.js";
 
-const account = jsonReader("./2-transactions-data-table1.json");
-const account_changes = jsonReader("./2-transactions-data-table2.json");
+const account = jsonReader("./2-transactions-data-account.json");
+const account_changes = jsonReader(
+  "./2-transactions-data-account-changes.json"
+);
 
 //connection
 connection.connect((err) => {
