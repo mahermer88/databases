@@ -3,6 +3,8 @@ import {
   checkError,
   useDatabase,
   executeQueries,
+  autoCommit,
+  commitOrRollback,
 } from "./initialization.js";
 
 const amount = 1000;
@@ -22,9 +24,7 @@ const transactionQueries = [
     VALUE
     (${sending_account}, ${amount}, 'OUT'),
     (${receiving_account}, ${amount}, 'IN')`,
-  `COMMIT`,
 ];
-const rollbackQueries = [`ROLLBACK`];
 
 //connection
 connection.connect((err) => {
@@ -35,9 +35,12 @@ connection.connect((err) => {
 useDatabase(`week3_homework`);
 
 try {
+  autoCommit(0);
   executeQueries(transactionQueries);
+  commitOrRollback(`COMMIT`);
+  autoCommit(1);
 } catch (err) {
-  executeQueries(rollbackQueries);
+  commitOrRollback(`ROLLBACK`);
   checkError(err);
 }
 
