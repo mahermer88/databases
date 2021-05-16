@@ -6,6 +6,7 @@ export const connection = createConnection({
   host: "localhost",
   user: "hyfuser",
   password: "hyfpassword",
+  // password: "123456",
 });
 
 //handle error
@@ -33,8 +34,8 @@ export const useDatabase = (dbName) => {
 };
 
 // function to create table:
-export const createTable = (tableName, tableFields) => {
-  const sql = `CREATE TABLE IF NOT EXISTS ${tableName} (${tableFields})`;
+export const createTable = (tableName, tableColumns) => {
+  const sql = `CREATE TABLE IF NOT EXISTS ${tableName} (${tableColumns})`;
   connection.query(sql, (err, results) => {
     checkError(err);
     console.log(`Table ${tableName} is created.`);
@@ -42,8 +43,8 @@ export const createTable = (tableName, tableFields) => {
 };
 
 // function to create table:
-export const alterTable = (tableName, alterTableFields) => {
-  const sql = `ALTER TABLE ${tableName} ${alterTableFields}`;
+export const alterTable = (tableName, alterTableColumns) => {
+  const sql = `ALTER TABLE ${tableName} ${alterTableColumns}`;
   connection.query(sql, (err, results) => {
     checkError(err);
     console.log(`Table ${tableName} is altered.`);

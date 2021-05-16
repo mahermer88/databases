@@ -55,8 +55,8 @@ const removeDocument = async (db) => {
   });
 };
 
-// Connection URL
-const url = "mongodb+srv://maher:qwermnbv88@cluster0.4iapg.mongodb.net/test";
+// Connection URL Insert the USER and PASSWORD
+const url = "mongodb+srv://<USER:PASSWORD>@cluster0.4iapg.mongodb.net/test";
 const client = new MongoClient(url, { useUnifiedTopology: true });
 
 // Use connect method to connect to the server

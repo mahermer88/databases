@@ -13,10 +13,6 @@ members (
     member_name 
     member_address 
 )
-dinner (
-    dinner_id (primary key)
-    dinner_date 
-)
 venues (
     venue_code (primary key)
     venue_description 
@@ -24,4 +20,12 @@ venues (
 food (
     food_code (primary key)
     food_description
+)
+
+dinner (
+    dinner_id (primary key)
+    dinner_date 
+    member_id (FOREIGN KEY REFERENCES members(member_id))
+    venue_code (FOREIGN KEY REFERENCES venues(venue_code))
+    food_code (FOREIGN KEY REFERENCES food(food_code))
 )

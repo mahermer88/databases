@@ -7,11 +7,11 @@ import {
 } from "./initialization.js";
 
 //create table called account with fields:
-const accountTableFields = `
+const accountTableColumns = `
       account_number INT PRIMARY KEY,
       balance FLOAT`;
 //create table called account_changes  with fields:
-const accountChangesTableFields = `
+const accountChangesTableColumns = `
       change_number INT AUTO_INCREMENT PRIMARY KEY,
       account_number INT,
       amount FLOAT,
@@ -27,8 +27,8 @@ connection.connect((err) => {
 
 createDatabase(`week3_homework`);
 useDatabase(`week3_homework`);
-createTable(`account`, accountTableFields);
-createTable(`account_changes`, accountChangesTableFields);
+createTable(`account`, accountTableColumns);
+createTable(`account_changes`, accountChangesTableColumns);
 
 connection.end((err) => {
   checkError(err);

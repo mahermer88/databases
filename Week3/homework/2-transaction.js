@@ -12,12 +12,20 @@ const receiving_account = 102;
 
 const transactionQueries = [
   `START TRANSACTION`,
-  `UPDATE account 
-    SET balance = balance - ${amount}
-    WHERE account_number = ${sending_account}`,
-  `UPDATE account 
-    SET balance = balance + ${amount}
-    WHERE account_number = ${receiving_account}`,
+  `PREPARE sending FROM 
+      'UPDATE account 
+      SET balance = balance - ?
+      WHERE account_number = ?'`,
+  `SET @amount = ${amount}`,
+  `SET @sendingAccount = ${sending_account}`,
+  `EXECUTE sending USING @amount, @sendingAccount`,
+  `PREPARE receiving FROM 
+      'UPDATE account 
+      SET balance = balance + ?
+      WHERE account_number = ?'`,
+  `SET @amount = ${amount}`,
+  `SET @receivingAccount =  ${receiving_account}`,
+  `EXECUTE receiving USING @amount, @receivingAccount`,
   `INSERT INTO account_changes
     (account_number, amount, remark)
     VALUE

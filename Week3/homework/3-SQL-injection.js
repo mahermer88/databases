@@ -1,5 +1,3 @@
-// Exercise 3 : SQL injection
-
 function getPopulation(Country, name, code, cb) {
   // assuming that connection to the database is established and stored as conn
   conn.query(
@@ -11,9 +9,8 @@ function getPopulation(Country, name, code, cb) {
     }
   );
 }
-
-// 1-Give an example of a value that can be passed as name and code that would take advantage of SQL-injection
-//  and (fetch all the records in the database)
+// Exercise3 : Give an example of a value that can be passed as name and code that would take advantage
+// of SQL-injection and (fetch all the records in the database)
 getPopulation(`Country`, `Aruba`, `ABW OR 1=1`, console.log);
 
 // 2-Rewrite the function so that it is no longer vulnerable to SQL injection

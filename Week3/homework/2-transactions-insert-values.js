@@ -6,8 +6,8 @@ import {
   jsonReader,
 } from "./initialization.js";
 
-const account = jsonReader("./2-transactions-data-account.json");
-const account_changes = jsonReader(
+const accountData = jsonReader("./2-transactions-data-account.json");
+const accountChangesData = jsonReader(
   "./2-transactions-data-account-changes.json"
 );
 
@@ -18,8 +18,8 @@ connection.connect((err) => {
 });
 
 useDatabase(`week3_homework`);
-insertTableContent(`account`, account);
-insertTableContent(`account_changes`, account_changes);
+insertTableContent(`account`, accountData);
+insertTableContent(`account_changes`, accountChangesData);
 
 connection.end((err) => {
   checkError(err);
