@@ -5,7 +5,7 @@ import { readFileSync } from "fs";
 export const connection = createConnection({
   host: "localhost",
   user: "hyfuser",
-  password: "123456",
+  password: "hyfpassword",
 });
 
 //handle error
@@ -76,15 +76,6 @@ export const jsonReader = (filePath) => {
   const file = readFileSync(filePath, `utf-8`);
   const array = JSON.parse(file);
   return array;
-};
-
-//function to auto commit:
-export const autoCommit = (bool) => {
-  if (!bool) {
-    executeQueries([`SET autocommit = 0`]);
-    return;
-  }
-  executeQueries([`SET autocommit = 1`]);
 };
 
 //function to commit or rollback:

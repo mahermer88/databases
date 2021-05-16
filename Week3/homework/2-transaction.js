@@ -3,7 +3,6 @@ import {
   checkError,
   useDatabase,
   executeQueries,
-  autoCommit,
   commitOrRollback,
 } from "./initialization.js";
 
@@ -35,10 +34,8 @@ connection.connect((err) => {
 useDatabase(`week3_homework`);
 
 try {
-  autoCommit(0);
   executeQueries(transactionQueries);
   commitOrRollback(`COMMIT`);
-  autoCommit(1);
 } catch (err) {
   commitOrRollback(`ROLLBACK`);
   checkError(err);
