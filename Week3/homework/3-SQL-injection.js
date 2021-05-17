@@ -14,14 +14,14 @@ function getPopulation(Country, name, code, cb) {
 getPopulation(`Country`, `Aruba`, `ABW OR 1=1`, console.log);
 
 // 2-Rewrite the function so that it is no longer vulnerable to SQL injection
-function getPopulation(name, code, cb) {
+function getPopulation(name, code, callback) {
   conn.query(
     `SELECT Population FROM Country WHERE Name = ? and code = ?`,
     [name, code],
     (err, result) => {
-      if (err) cb(err);
-      if (result.length == 0) cb(new Error("Not found"));
-      cb(null, result[0].name);
+      if (err) callback(err);
+      if (result.length == 0) callback(new Error("Not found"));
+      callback(null, result[0].name);
     }
   );
 }
